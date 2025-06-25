@@ -24,7 +24,7 @@ function App() {
       } else if (code) {
         try {
           await getToken(code);
-          window.history.replaceState({}, document.title, '/');
+          window.history.replaceState({}, document.title, '/jammming');
         } catch (error) {
           console.error(error);
         } finally {
