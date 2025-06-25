@@ -1,0 +1,95 @@
+.track {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  background: #fff;
+  border-radius: 8px;
+  margin-bottom: 14px;
+  padding: 16px 20px;
+  font-family: var(--font-body);
+  color: var(--color-secondary);
+  border: 1px solid var(--color-highlight);
+}
+
+.track:hover {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+.info {
+  margin-right: auto;
+}
+
+.songName {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  color: var(--color-primary);
+  margin: 0 0 6px 0;
+  letter-spacing: 0.5px;
+}
+
+.songInfo {
+  display: flex;
+  flex-direction: row;
+  gap: 18px;
+  font-size: 0.98rem;
+  color: var(--color-secondary);
+  opacity: 0.85;
+  margin: 0;
+}
+
+.album {
+  font-variant-numeric: tabular-nums;
+  color: var(--color-highlight);
+}
+
+.addSong {
+  border: 0;
+  padding: 5px;
+  font-size: 1.3rem;
+  color: var(--color-highlight);
+  transition: background-color 250ms;
+}
+
+.removeSong {
+  border: 0;
+  padding: 5px;
+  font-size: 1.6rem;
+  color: var(--color-error);
+  transition: background-color 250ms;
+}
+
+.addSong:hover {
+  cursor: pointer;
+  background-color: var(--color-secondary);
+}
+
+.removeSong:hover {
+  cursor: pointer;
+  background-color: var(--color-secondary);
+}
+
+.addSong:focus {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.removeSong:focus {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+  .track {
+    padding: 10px 8px;
+  }
+  .songName {
+    font-size: 1rem;
+  }
+  .info {
+    font-size: 0.93rem;
+    gap: 10px;
+  }
+}

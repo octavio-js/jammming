@@ -8,8 +8,10 @@ function App() {
   return (
     <>
       <SearchBar />
-      <SearchResults />
-      <Playlist />
+      <div className="results-playlist">
+        <SearchResults />
+        <Playlist />
+      </div>
     </>
   );
 }

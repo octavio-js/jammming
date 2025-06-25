@@ -1,9 +1,10 @@
 import React from "react";
 import Track from "./Track";
+import styles from './styles/tracklist.module.css';
 
 function Tracklist() {
   return (
-    <div>
+    <div className={styles.results}>
       <Track />
       <Track />
       <Track />
