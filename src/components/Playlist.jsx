@@ -8,6 +8,8 @@ function Playlist(props) {
     e.preventDefault();
     if (props.playlistName.length === 0) {
       alert('Please name your playlist!');
+    } else {
+      props.handleSave();
     }
   };
 
@@ -18,7 +20,7 @@ function Playlist(props) {
       <div className={styles.tracks}>
         <Tracklist handleRemoveFromPlaylist={props.handleRemoveFromPlaylist} tracks={props.plTracks} isRemovable={true} />
       </div>
-      <button onClick={() => props.handleSave()} className={styles.button} type="button">SAVE TO SPOTIFY</button>
+      <button className={styles.button} type="submit">SAVE TO SPOTIFY</button>
     </form>
   );
 }

@@ -3,7 +3,7 @@ import SearchBar from "./components/SearchBar";
 import SearchResults from "./components/SearchResults";
 import Playlist from "./components/Playlist";
 import './App.css';
-import { getTracks } from "./utils/spotifyApi";
+import { getTracks, savePlaylist } from "./utils/spotifyApi";
 import { redirectToSpotifyAuth, getToken } from './utils/spotifyAuth';
 
 function App() {
@@ -69,14 +69,16 @@ function App() {
   }
 
   function getURIs(tracks) {
-    const uris = tracks.map(track => {
-      return track.uri;
-    });
-    return uris;
+    return tracks.map(track => track.uri);
   }
 
-  function savePlaylist() {
+  async function createPlaylist() {
+    if (playlistTracks.length === 0) {
+      alert("Add at least one track to save a playlist");
+      return;
+    }
     const tracksURIs = getURIs(playlistTracks);
+    await savePlaylist(playlistName, tracksURIs);
     setPlaylistTracks([]);
   }
 
@@ -89,7 +91,7 @@ function App() {
       <SearchBar searchValue={searchValue} searchUpdate={setSearchValue} searchForTracks={fetchTracks} />
       <div className="results-playlist">
         <SearchResults handleAddToPlaylist={addToPlaylist} tracks={tracksList} />
-        <Playlist handleRemoveFromPlaylist={removeFromPlaylist} handleSave={savePlaylist} playlistName={playlistName} updatePlaylistName={setPlaylistName} plTracks={playlistTracks} />
+        <Playlist handleRemoveFromPlaylist={removeFromPlaylist} handleSave={createPlaylist} playlistName={playlistName} updatePlaylistName={setPlaylistName} plTracks={playlistTracks} />
       </div>
     </>
   );
