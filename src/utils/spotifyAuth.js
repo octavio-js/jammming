@@ -49,9 +49,6 @@ async function getToken(code) {
     throw new Error('Code verifier not found');
   }
 
-  console.log('code:', code);
-  console.log('code verifier:', codeVerifier);
-
   const url = "https://accounts.spotify.com/api/token";
   const clientId = '9e0e8b7b19d649fabd0f4549fdc5a834';
   const redirectUri = 'https://octavio-js.github.io/jammming';
