@@ -18,28 +18,6 @@ async function getTracks(search) {
   }
 }
 
-async function getUserId() {
-  const accessToken = localStorage.getItem('access_token');
-
-  try {
-    const response = await fetch('https://api.spotify.com/v1/me', {
-      headers: {
-        Authorization: `Bearer ${accessToken}`
-      }
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(`Failed to fetch user info: ${errorData.error.message}`);
-    }
-
-    const data = await response.json();
-    return data.id;
-  } catch (error) {
-    console.error(`Error fetching user ID: ${error.message}`);
-  }
-}
-
 async function addTracksToPlaylist(playlistId, trackUris) {
   const endpoint = `https://api.spotify.com/v1/playlists/${playlistId}/tracks`;
   const accessToken = localStorage.getItem('access_token');
@@ -68,8 +46,7 @@ async function addTracksToPlaylist(playlistId, trackUris) {
 }
 
 async function savePlaylist(playlistName, trackUris) {
-  const userId = await getUserId();
-  const endpoint = `https://api.spotify.com/v1/users/${userId}/playlists`;
+  const endpoint = `https://api.spotify.com/v1/me/playlists`;
   const accessToken = localStorage.getItem('access_token');
   try {
     const response = await fetch(endpoint, {
