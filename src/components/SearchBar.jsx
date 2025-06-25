@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from './styles/searchbar.module.css';
 
-function SearchBar() {
-  const [searchValue, setSearchValue] = useState("");
-
-  const handleChange = (e) => setSearchValue(e.target.value);
+function SearchBar(props) {
+  const handleChange = (e) => props.searchUpdate(e.target.value);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    props.searchForTracks();
+  };
 
   return (
-    <form className={styles.form}>
+    <form onSubmit={handleSubmit} className={styles.form}>
       <h1 className={styles.header}>
         Ja
         <span className={styles.firstM}>m</span>
@@ -15,7 +17,7 @@ function SearchBar() {
         <span className={styles.thirdM}>m</span>
         ing
       </h1>
-      <input className={styles.input} onChange={handleChange} value={searchValue} name="search" id="search" type="text" placeholder="Search..." />
+      <input className={styles.input} onChange={handleChange} value={props.searchValue} name="search" id="search" type="text" placeholder="Search..." />
       <button className={styles.button} type="submit">SEARCH</button>
     </form>
   );

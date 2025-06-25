@@ -3,53 +3,59 @@ import SearchBar from "./components/SearchBar";
 import SearchResults from "./components/SearchResults";
 import Playlist from "./components/Playlist";
 import './App.css';
-
-const fetchedTracks = [
-  {
-    name: "Paranoia",
-    artist: "The Marias",
-    album: "Submarine",
-    id: 1,
-    uri: 'abc123'
-  },
-  {
-    name: "Pretty Curse",
-    artist: "INOHA",
-    album: "Chance 2 Dance",
-    id: 2,
-    uri: 'abc124'
-  },
-  {
-    name: "t-shirt",
-    artist: "boy pablo",
-    album: "Soy Pablo",
-    id: 3,
-    uri: 'abc125'
-  },
-  {
-    name: "favorite apple",
-    artist: "The Two Lips",
-    album: "favorite apple",
-    id: 4,
-    uri: 'abc126'
-  },
-  {
-    name: "Telephones",
-    artist: "Vacations",
-    album: "Changes",
-    id: 5,
-    uri: 'abc127'
-  }
-];
+import { getTracks } from "./utils/spotifyApi";
+import { redirectToSpotifyAuth, getToken } from './utils/spotifyAuth';
 
 function App() {
+  const [searchValue, setSearchValue] = useState("");
   const [tracksList, setTracksList] = useState([]);
   const [playlistTracks, setPlaylistTracks] = useState([]);
   const [playlistName, setPlaylistName] = useState("My Playlist");
+  const [loading , setLoading] = useState(true);
 
   useEffect(() => {
-    setTracksList(fetchedTracks);
+    const initAuth = async () => {
+      const params = new URLSearchParams(window.location.search);
+      const code = params.get('code');
+      const token = localStorage.getItem('access_token');
+
+      if (token) {
+        setLoading(false);
+      } else if (code) {
+        try {
+          await getToken(code);
+          window.history.replaceState({}, document.title, '/');
+        } catch (error) {
+          console.error(error);
+        } finally {
+          setLoading(false);
+        }
+      } else {
+        redirectToSpotifyAuth();
+      }
+    };
+
+    initAuth();
   }, []);
+
+
+  async function fetchTracks() {
+  if (!searchValue.trim()) return;
+
+  try {
+    const fetchedTracks = await getTracks(searchValue);
+    const tracks = fetchedTracks.map(track => ({
+      name: track.name,
+      artist: track.artists[0].name,
+      album: track.album.name,
+      uri: track.uri,
+      id: track.id
+    }));
+    setTracksList(tracks);
+  } catch (err) {
+    console.error('Failed to fetch tracks:', err);
+  }
+}
 
   function addToPlaylist(track) {
     const exists = playlistTracks.some(t => t.id === track.id);
@@ -74,9 +80,13 @@ function App() {
     setPlaylistTracks([]);
   }
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
-      <SearchBar />
+      <SearchBar searchValue={searchValue} searchUpdate={setSearchValue} searchForTracks={fetchTracks} />
       <div className="results-playlist">
         <SearchResults handleAddToPlaylist={addToPlaylist} tracks={tracksList} />
         <Playlist handleRemoveFromPlaylist={removeFromPlaylist} handleSave={savePlaylist} playlistName={playlistName} updatePlaylistName={setPlaylistName} plTracks={playlistTracks} />

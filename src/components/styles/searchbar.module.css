@@ -55,6 +55,30 @@
   outline-offset: 2px;
 }
 
+.login {
+  background-color: var(--color-secondary);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0 14px;
+  height: 44px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 200ms, color 200ms;
+  font-family: var(--font-heading);
+}
+
+.login:hover {
+  background-color: var(--color-highlight);
+  color: var(--color-secondary);
+}
+
+.login:focus {
+  border: 2px solid var(--color-accent);
+  outline: none;
+}
+
 .firstM {
   color: #a21caf;
 }
@@ -77,7 +101,7 @@
     padding: 14px 6px;
   }
   .input {
-    width: 100%;
+    width: 85%;
     min-width: 0;
     font-size: 0.98rem;
     height: 40px;
@@ -88,6 +112,13 @@
     min-width: 0;
     font-size: 0.98rem;
     height: 40px;
+    padding: 0 10px;
+  }
+  .login {
+    width: 20%;
+    min-width: 0;
+    font-size: 0.98rem;
+    height: 30px;
     padding: 0 10px;
   }
   .header {

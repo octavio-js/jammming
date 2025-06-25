@@ -4,8 +4,6 @@ function generateRandomString() {
   return values.reduce((acc, x) => acc + possible[x % possible.length], "");
 }
 
-const codeVerifier = generateRandomString(64);
-
 async function sha256(plain) {
   const encoder = new TextEncoder();
   const data = encoder.encode(plain);
@@ -19,36 +17,38 @@ function base64encode(input) {
   .replace(/\//g, '_');
 }
 
-const hashed = await sha256(codeVerifier);
-const codeChallenge = base64encode(hashed);
+async function redirectToSpotifyAuth() {
+  const codeVerifier = generateRandomString(64);
+  const hashed = await sha256(codeVerifier);
+  const codeChallenge = base64encode(hashed);
 
-const clientId = '9e0e8b7b19d649fabd0f4549fdc5a834';
-const redirectUri = 'http://127.0.0.1:5173';
+  localStorage.setItem('code_verifier', codeVerifier);
 
-const scope = 'user-read-private user-read-email';
-const authUrl = new URL("https://accounts.spotify.com/authorize");
+  const clientId = '9e0e8b7b19d649fabd0f4549fdc5a834';
+  const redirectUri = 'https://octavio-js.github.io/jammming';
+  const scope = 'user-read-private user-read-email';
 
-window.localStorage.setItem('code_verifier', codeVerifier);
+  const authUrl = new URL("https://accounts.spotify.com/authorize");
 
-const params = {
-  response_type: 'code',
-  client_id: clientId,
-  scope,
-  code_challenge_method: 'S256',
-  code_challenge: codeChallenge,
-  redirectUri: redirectUri,
+  authUrl.search = new URLSearchParams({
+    response_type: 'code',
+    client_id: clientId,
+    scope,
+    redirect_uri: redirectUri,
+    code_challenge_method: 'S256',
+    code_challenge: codeChallenge,
+  });
+
+  window.location.href = authUrl.toString();
 }
-
-authUrl.search = new URLSearchParams(params).toString();
-window.location.href = authUrl.toString();
-
-const urlParams = new URLSearchParams(window.location.search);
-let code = urlParams.get('code');
 
 async function getToken(code) {
   const codeVerifier = localStorage.getItem('code_verifier');
 
   const url = "https://accounts.spotify.com/api/token";
+  const clientId = '9e0e8b7b19d649fabd0f4549fdc5a834';
+  const redirectUri = 'https://octavio-js.github.io/jammming';
+
   const payload = {
     method: 'POST',
     headers: {
@@ -61,12 +61,18 @@ async function getToken(code) {
       redirect_uri: redirectUri,
       code_verifier: codeVerifier,
     }),
-  }
+  };
 
   const body = await fetch(url, payload);
   const response = await body.json();
-  
-  localStorage.setItem('access_token', response.access_token);
+
+  if (response.access_token) {
+    localStorage.setItem('access_token', response.access_token);
+    return response.access_token;
+  } else {
+    console.error("Error retrieving access token:", response);
+    throw new Error("Failed to get token");
+  }
 }
 
-export { getToken };
+export { redirectToSpotifyAuth, getToken };
