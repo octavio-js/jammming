@@ -18,7 +18,7 @@ function Playlist(props) {
       <div className={styles.tracks}>
         <Tracklist handleRemoveFromPlaylist={props.handleRemoveFromPlaylist} tracks={props.plTracks} isRemovable={true} />
       </div>
-      <button className={styles.button} type="submit">SAVE TO SPOTIFY</button>
+      <button onClick={() => props.handleSave()} className={styles.button} type="button">SAVE TO SPOTIFY</button>
     </form>
   );
 }
