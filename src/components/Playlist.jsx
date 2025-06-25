@@ -13,8 +13,8 @@ function Playlist(props) {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <input className={styles.input} onChange={handleChange} value={props.playlistName} name="playlistName" id="playlistName" type="text" placeholder="Playlist Name..." />
       <h3 className={styles.playlistName} id="name-of-playlist">{props.playlistName}</h3>
+      <input className={styles.input} onChange={handleChange} value={props.playlistName} name="playlistName" id="playlistName" type="text" placeholder="Playlist Name..." />
       <div className={styles.tracks}>
         <Tracklist tracks={props.plTracks} />
       </div>

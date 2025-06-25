@@ -37,27 +37,6 @@ const fetchedTracks = [
   }
 ];
 
-const addedToPlaylistTracks = [
-  {
-    name: "Paranoia",
-    artist: "The Marias",
-    album: "Submarine",
-    id: 1
-  },
-  {
-    name: "Pretty Curse",
-    artist: "INOHA",
-    album: "Chance 2 Dance",
-    id: 2
-  },
-  {
-    name: "t-shirt",
-    artist: "boy pablo",
-    album: "Soy Pablo",
-    id: 3
-  }
-];
-
 function App() {
   const [tracksList, setTracksList] = useState([]);
   const [playlistTracks, setPlaylistTracks] = useState([]);
@@ -67,15 +46,18 @@ function App() {
     setTracksList(fetchedTracks);
   }, []);
 
-  useEffect(() => {
-    setPlaylistTracks(addedToPlaylistTracks);
-  }, []);
+  function addToPlaylist(track) {
+    const exists = playlistTracks.some(obj => obj.id === track.id);
+    if (!exists) {
+      setPlaylistTracks([...playlistTracks, track])
+    }
+  }
 
   return (
     <>
       <SearchBar />
       <div className="results-playlist">
-        <SearchResults tracks={tracksList} />
+        <SearchResults handleAddToPlaylist={addToPlaylist} tracks={tracksList} />
         <Playlist playlistName={playlistName} updatePlaylistName={setPlaylistName} plTracks={playlistTracks} />
       </div>
     </>

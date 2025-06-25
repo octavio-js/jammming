@@ -6,7 +6,7 @@ function Tracklist(props) {
   return (
     <div className={styles.results}>
       {props.tracks.map(track => (
-        <Track key={track.id} songName={track.name} artist={track.artist} albumName={track.album} />
+        <Track handleAddToPlaylist={props.onAddToPlaylist} t={track} key={track.id} songName={track.name} artist={track.artist} albumName={track.album} />
       ))}
     </div>
   );

@@ -11,6 +11,7 @@ function Track(props) {
           <p className={styles.album}>{props.albumName}</p>
         </div>
       </div>
+      <button onClick={() => props.handleAddToPlaylist(props.t)} className={styles.addSong}>+</button>
     </div>
   );
 }
