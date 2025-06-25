@@ -24,6 +24,7 @@ function App() {
       } else if (code) {
         try {
           await getToken(code);
+          console.log('Code exchanged successfully. Cleaning URL...');
           window.history.replaceState({}, document.title, '/jammming');
         } catch (error) {
           console.error(error);
@@ -44,6 +45,8 @@ function App() {
 
   try {
     const fetchedTracks = await getTracks(searchValue);
+    if (!fetchedTracks) return;
+
     const tracks = fetchedTracks.map(track => ({
       name: track.name,
       artist: track.artists[0].name,
@@ -80,6 +83,8 @@ function App() {
     const tracksURIs = getURIs(playlistTracks);
     await savePlaylist(playlistName, tracksURIs);
     setPlaylistTracks([]);
+    setTracksList([]);
+    setSearchValue("");
   }
 
   if (loading) {

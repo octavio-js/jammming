@@ -26,7 +26,7 @@ async function redirectToSpotifyAuth() {
 
   const clientId = '9e0e8b7b19d649fabd0f4549fdc5a834';
   const redirectUri = 'https://octavio-js.github.io/jammming';
-  const scope = 'user-read-private user-read-email';
+  const scope = 'playlist-modify-private playlist-modify-public user-read-private user-read-email';
 
   const authUrl = new URL("https://accounts.spotify.com/authorize");
 
@@ -45,6 +45,7 @@ async function redirectToSpotifyAuth() {
 
 async function getToken(code) {
   const codeVerifier = sessionStorage.getItem('code_verifier');
+
   if (!codeVerifier) {
     throw new Error('Code verifier not found');
   }
@@ -72,6 +73,7 @@ async function getToken(code) {
 
   if (response.access_token) {
     localStorage.setItem('access_token', response.access_token);
+    localStorage.removeItem('code_verifier');
     return response.access_token;
   } else {
     console.error("Error retrieving access token:", response);
