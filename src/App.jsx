@@ -47,10 +47,14 @@ function App() {
   }, []);
 
   function addToPlaylist(track) {
-    const exists = playlistTracks.some(obj => obj.id === track.id);
+    const exists = playlistTracks.some(t => t.id === track.id);
     if (!exists) {
       setPlaylistTracks([...playlistTracks, track])
     }
+  }
+
+  function removeFromPlaylist(track) {
+    setPlaylistTracks(playlistTracks.filter(t => t.id !== track.id));
   }
 
   return (
@@ -58,7 +62,7 @@ function App() {
       <SearchBar />
       <div className="results-playlist">
         <SearchResults handleAddToPlaylist={addToPlaylist} tracks={tracksList} />
-        <Playlist playlistName={playlistName} updatePlaylistName={setPlaylistName} plTracks={playlistTracks} />
+        <Playlist handleRemoveFromPlaylist={removeFromPlaylist} playlistName={playlistName} updatePlaylistName={setPlaylistName} plTracks={playlistTracks} />
       </div>
     </>
   );
