@@ -2,8 +2,6 @@ async function getTracks(search) {
   const endpoint = `https://api.spotify.com/v1/search?q=${encodeURIComponent(search)}&type=track`;
   const accessToken = localStorage.getItem('access_token');
 
-  console.log(accessToken);
-
   if (!accessToken) {
     alert("Access token missing. Please log in again");
     window.location.reload();
@@ -82,8 +80,6 @@ async function savePlaylist(playlistName, trackUris) {
       })
     });
 
-    console.log("Granted scopes:", response.scope);
-
     if (!response.ok) {
       const errorData = await response.json();
       console.error("Full Spotify error response:", errorData);
@@ -94,9 +90,6 @@ async function savePlaylist(playlistName, trackUris) {
     const playlistId = data.id;
 
     await addTracksToPlaylist(playlistId, trackUris);
-
-    const playlistUrl = `https://open.spotify.com/playlist/${playlistId}`;
-    console.log(`Playlist created: ${playlistUrl}`);
   } catch(error) {
     console.error('Error creating playlist:', error.message);
   }

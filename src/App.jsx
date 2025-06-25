@@ -24,7 +24,6 @@ function App() {
       } else if (code) {
         try {
           await getToken(code);
-          console.log('Code exchanged successfully. Cleaning URL...');
           window.history.replaceState({}, document.title, '/jammming');
         } catch (error) {
           console.error(error);
