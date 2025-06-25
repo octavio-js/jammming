@@ -29,6 +29,15 @@
   outline: none;
 }
 
+.playlistName {
+  font-family: var(--font-heading);
+  color: var(--color-primary);
+  font-size: 1.6rem;
+  margin-bottom: 18px;
+  margin-top: 0;
+  letter-spacing: 1px;
+}
+
 .tracks {
   width: 100%;
   background: #fff;
