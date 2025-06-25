@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;500&display=swap');
+
+:root {
+  --font-heading: 'Orbitron', sans-serif;
+  --font-body: 'Poppins', sans-serif;
+  --color-primary: #8b5cf6;
+  --color-secondary: #312e81;
+  --color-accent: #e5bcfc;
+  --color-background: #0f172a;
+  --color-highlight: #f472b6;
+  --color-error: #f43f5e;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100vh;
+  background: linear-gradient(135deg, #0f172a 0%, #312e81 60%, #6837db 100%);
+  background-repeat: no-repeat;
+}
