@@ -2,12 +2,12 @@ import React from "react";
 import Track from "./Track";
 import styles from './styles/tracklist.module.css';
 
-function Tracklist() {
+function Tracklist(props) {
   return (
     <div className={styles.results}>
-      <Track />
-      <Track />
-      <Track />
+      {props.tracks.map(track => (
+        <Track songName={track.name} artist={track.artist} albumName={track.album} />
+      ))}
     </div>
   );
 }

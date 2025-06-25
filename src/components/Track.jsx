@@ -1,14 +1,14 @@
 import React from "react";
 import styles from './styles/track.module.css';
 
-function Track() {
+function Track(props) {
   return (
     <div className={styles.track}>
       <div className={styles.info}>
-        <h4 className={styles.songName}>Song Name</h4>
+        <h4 className={styles.songName}>{props.songName}</h4>
         <div className={styles.songInfo}>
-          <p>Artist Name</p>
-          <p className={styles.album}>Album Name</p>
+          <p>{props.artist}</p>
+          <p className={styles.album}>{props.albumName}</p>
         </div>
       </div>
     </div>
