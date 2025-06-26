@@ -1,13 +1,15 @@
+import { redirectToSpotifyAuth } from "./spotifyAuth";
+
 async function getTracks(search) {
-  const endpoint = `https://api.spotify.com/v1/search?q=${encodeURIComponent(search)}&type=track`;
   const accessToken = localStorage.getItem('access_token');
 
   if (!accessToken) {
     alert("Access token missing. Please log in again");
-    window.location.reload();
+    redirectToSpotifyAuth();
     return;
   }
 
+  const endpoint = `https://api.spotify.com/v1/search?q=${encodeURIComponent(search)}&type=track`;
   try {
     const response = await fetch(endpoint, {
       headers: {
@@ -18,6 +20,13 @@ async function getTracks(search) {
     if (response.status === 401) {
       localStorage.removeItem('access_token');
       window.location.reload();
+      return;
+    }
+
+    if (response.status === 403) {
+      alert('Access denied. Restarting login...');
+      localStorage.removeItem('access_token');
+      redirectToSpotifyAuth();
       return;
     }
 

@@ -20,13 +20,27 @@ function App() {
         setIsLoggedIn(true);
         setLoading(false);
       } else {
-        const params = new URLSearchParams(window.location.search);
-        const code = params.get('code');
+        const code = new URLSearchParams(window.location.search).get('code');
         if (code) {
-          getToken(code).then(() => {
-            setIsLoggedIn(true);
-            window.history.replaceState({}, document.title, '/jammming');
-          }).catch(console.error).finally(() => setLoading(false));
+          const verifier = localStorage.getItem('code_verifier');
+          if (!verifier) {
+            redirectToSpotifyAuth();
+            return;
+          }
+
+          getToken(code).then((accessToken) => {
+            if (accessToken) {
+              setIsLoggedIn(true);
+              window.history.replaceState({}, document.title, '/jammming');
+            } else {
+              console.error("Token exchange returned nothing");
+            }
+          })
+          .catch(err => {
+            console.error("Token exchange failed:", err);
+            redirectToSpotifyAuth();
+          })
+          .finally(() => setLoading(false));
         } else {
           setLoading(false);
         }
