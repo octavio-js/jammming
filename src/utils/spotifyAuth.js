@@ -22,7 +22,7 @@ async function redirectToSpotifyAuth() {
   const hashed = await sha256(codeVerifier);
   const codeChallenge = base64encode(hashed);
 
-  sessionStorage.setItem('code_verifier', codeVerifier);
+  localStorage.setItem('code_verifier', codeVerifier);
 
   const clientId = '9e0e8b7b19d649fabd0f4549fdc5a834';
   const redirectUri = 'https://octavio-js.github.io/jammming';
@@ -44,7 +44,7 @@ async function redirectToSpotifyAuth() {
 }
 
 async function getToken(code) {
-  const codeVerifier = sessionStorage.getItem('code_verifier');
+  const codeVerifier = localStorage.getItem('code_verifier');
 
   if (!codeVerifier) {
     throw new Error('Code verifier not found');

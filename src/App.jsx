@@ -12,30 +12,25 @@ function App() {
   const [playlistTracks, setPlaylistTracks] = useState([]);
   const [playlistName, setPlaylistName] = useState("My Playlist");
   const [loading , setLoading] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    const initAuth = async () => {
-      const params = new URLSearchParams(window.location.search);
-      const code = params.get('code');
       const token = localStorage.getItem('access_token');
-
       if (token) {
+        setIsLoggedIn(true);
         setLoading(false);
-      } else if (code) {
-        try {
-          await getToken(code);
-          window.history.replaceState({}, document.title, '/jammming');
-        } catch (error) {
-          console.error(error);
-        } finally {
+      } else {
+        const params = new URLSearchParams(window.location.search);
+        const code = params.get('code');
+        if (code) {
+          getToken(code).then(() => {
+            setIsLoggedIn(true);
+            window.history.replaceState({}, document.title, '/jammming');
+          }).catch(console.error).finally(() => setLoading(false));
+        } else {
           setLoading(false);
         }
-      } else {
-        redirectToSpotifyAuth();
       }
-    };
-
-    initAuth();
   }, []);
 
 
@@ -92,7 +87,7 @@ function App() {
 
   return (
     <>
-      <SearchBar searchValue={searchValue} searchUpdate={setSearchValue} searchForTracks={fetchTracks} />
+      <SearchBar login={redirectToSpotifyAuth} isLoggedIn={isLoggedIn} searchValue={searchValue} searchUpdate={setSearchValue} searchForTracks={fetchTracks} />
       <div className="results-playlist">
         <SearchResults handleAddToPlaylist={addToPlaylist} tracks={tracksList} />
         <Playlist handleRemoveFromPlaylist={removeFromPlaylist} handleSave={createPlaylist} playlistName={playlistName} updatePlaylistName={setPlaylistName} plTracks={playlistTracks} />
