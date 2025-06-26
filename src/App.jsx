@@ -30,10 +30,12 @@ function App() {
 
           getToken(code).then((accessToken) => {
             if (accessToken) {
+              localStorage.setItem('access_token', accessToken);
               setIsLoggedIn(true);
               window.history.replaceState({}, document.title, '/jammming');
             } else {
               console.error("Token exchange returned nothing");
+              redirectToSpotifyAuth();
             }
           })
           .catch(err => {
