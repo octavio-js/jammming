@@ -10,7 +10,7 @@ function SearchBar(props) {
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
-      {props.isLoggedIn ? <p></p> : <button onClick={props.login}>Login</button>}
+      {props.isLoggedIn ? <p></p> : <button className={styles.login} onClick={props.login}>Login with Spotify</button>}
       <h1 className={styles.header}>
         Ja
         <span className={styles.firstM}>m</span>
