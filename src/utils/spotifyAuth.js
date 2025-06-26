@@ -33,12 +33,14 @@ async function redirectToSpotifyAuth() {
   authUrl.search = new URLSearchParams({
     response_type: 'code',
     client_id: clientId,
-    scope,
+    scope: scope,
     redirect_uri: redirectUri,
     code_challenge_method: 'S256',
     code_challenge: codeChallenge,
     state: codeVerifier,
   });
+
+  console.log("🔐 Spotify Auth URL:", authUrl.toString());
 
   window.location.href = authUrl.toString();
 }
