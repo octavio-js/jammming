@@ -2,6 +2,7 @@ import { redirectToSpotifyAuth } from "./spotifyAuth";
 
 async function getTracks(search) {
   const accessToken = localStorage.getItem('access_token');
+  console.log("🔎 [getTracks] Using access token:", accessToken);
 
   if (!accessToken) {
     alert("Access token missing. Please log in again");
@@ -17,13 +18,17 @@ async function getTracks(search) {
       }
     });
 
+    console.log("🔁 [getTracks] Response status:", response.status);
+
     if (response.status === 401) {
+      console.warn("Token expired or invalid (401)");
       localStorage.removeItem('access_token');
       window.location.reload();
       return;
     }
 
     if (response.status === 403) {
+      console.warn("Access forbidden (403) Token likely invalid or missing scopes.");
       alert('Access denied. Restarting login...');
       localStorage.removeItem('access_token');
       redirectToSpotifyAuth();
@@ -32,7 +37,7 @@ async function getTracks(search) {
 
     if (!response.ok) {
       const err = await response.json();
-      console.error(`Spotify API error: ${err}`);
+      console.error('Spotify API error:', err);
       return;
     }
 
@@ -40,7 +45,7 @@ async function getTracks(search) {
     return data.tracks.items;
   } catch (error) {
     alert('Error fetching the tracks. Sorry!');
-    console.log(error);
+    console.log("Fetch failed:", error);
   }
 }
 
