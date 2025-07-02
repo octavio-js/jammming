@@ -74,6 +74,9 @@ async function getToken(code) {
   const response = await body.json();
 
   if (response.access_token) {
+    console.log("✅ Access token received:", response.access_token);
+    console.log("🔍 Token scopes:", response.scope);
+    localStorage.setItem('token_scope', response.scope);
     localStorage.setItem('access_token', response.access_token);
     localStorage.removeItem('code_verifier');
     return response.access_token;

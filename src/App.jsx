@@ -24,6 +24,9 @@ function App() {
         if (code) {
           const verifier = localStorage.getItem('code_verifier');
           if (!verifier) {
+            console.warn("❌ Missing code_verifier. Forcing clean re-auth.");
+            localStorage.clear();
+            sessionStorage.clear();
             redirectToSpotifyAuth();
             return;
           }
