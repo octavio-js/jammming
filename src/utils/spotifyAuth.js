@@ -40,7 +40,7 @@ async function redirectToSpotifyAuth() {
     state: codeVerifier,
   });
 
-  console.log("🔐 Spotify Auth URL:", authUrl.toString());
+  console.log("Spotify Auth URL:", authUrl.toString());
 
   window.location.href = authUrl.toString();
 }
