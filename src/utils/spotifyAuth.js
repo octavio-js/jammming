@@ -26,7 +26,13 @@ async function redirectToSpotifyAuth() {
 
   const clientId = '9e0e8b7b19d649fabd0f4549fdc5a834';
   const redirectUri = 'https://octavio-js.github.io/jammming';
-  const scope = 'playlist-modify-private playlist-modify-public user-read-private user-read-email';
+  const scope = [
+    'playlist-modify-private',
+    'playlist-modify-public',
+    'user-read-private',
+    'user-read-email',
+    'user-read-playback-position'
+  ].join(' ');
 
   const authUrl = new URL("https://accounts.spotify.com/authorize");
 
