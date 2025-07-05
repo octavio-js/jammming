@@ -2,7 +2,6 @@ import { redirectToSpotifyAuth } from "./spotifyAuth";
 
 async function getTracks(search) {
   const accessToken = localStorage.getItem('access_token');
-  console.log("🔎 [getTracks] Using access token:", accessToken);
 
   if (!accessToken) {
     alert("Access token missing. Please log in again");
@@ -17,8 +16,6 @@ async function getTracks(search) {
         Authorization: `Bearer ${accessToken}`
       }
     });
-
-    console.log("🔁 [getTracks] Response status:", response.status);
 
     if (response.status === 401) {
       console.warn("Token expired or invalid (401)");
@@ -45,7 +42,7 @@ async function getTracks(search) {
     return data.tracks.items;
   } catch (error) {
     alert('Error fetching the tracks. Sorry!');
-    console.log("Fetch failed:", error);
+    console.log(error);
   }
 }
 

@@ -46,8 +46,6 @@ async function redirectToSpotifyAuth() {
     state: codeVerifier,
   });
 
-  console.log("Spotify Auth URL:", authUrl.toString());
-
   window.location.href = authUrl.toString();
 }
 
@@ -80,8 +78,6 @@ async function getToken(code) {
   const response = await body.json();
 
   if (response.access_token) {
-    console.log("✅ Access token received:", response.access_token);
-    console.log("🔍 Token scopes:", response.scope);
     localStorage.setItem('token_scope', response.scope);
     localStorage.setItem('access_token', response.access_token);
     localStorage.removeItem('code_verifier');
