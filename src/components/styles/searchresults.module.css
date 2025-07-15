@@ -4,6 +4,7 @@
   background-color: var(--color-background);
   margin-left: 80px;
   padding: 8px;
+  border-radius: 8px;
 }
 
 .header {
