@@ -1,4 +1,73 @@
 .form {
   grid-column: span 2;
-  background-color: red;
+  background-color: var(--color-background);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px;
+}
+
+.header {
+  text-align: center;
+  color: white;
+  font-family: var(--font-heading);
+  width: 100%;
+}
+
+.firstM {
+  color: #a21caf;
+}
+
+.secondM {
+  color: #fbbf24;
+}
+
+.thirdM {
+  color: #38bdf8;
+}
+
+.login,
+.search {
+  background-color: var(--color-primary);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: #fff;
+  border: 2px solid var(--color-accent);
+  border-radius: 8px;
+  padding: 8px;
+  transition: background-color 200ms ease-in-out,
+              border-color 200ms ease-in-out;
+}
+
+.login:hover,
+.search:hover {
+  cursor: pointer;
+  background-color: var(--color-secondary);
+  border-color: var(--color-highlight);
+  transition: background-color 200ms ease-in-out,
+              border-color 200ms ease-in-out;
+}
+
+.input {
+  font-family: var(--font-body);
+  border: 3px solid var(--color-accent);
+  border-radius: 8px;
+  padding: 8px;
+  font-size: 0.95rem;
+  width: 50%;
+  max-width: 450px;
+  transition: border-color 250ms ease-in-out;
+}
+
+.input:focus {
+  outline: 0;
+  border-color: var(--color-highlight);
+  transition: border-color 250ms ease-in-out;
+}
+
+.input:focus::placeholder {
+  color: transparent;
+  transition: color 250ms ease-in-out;
 }
