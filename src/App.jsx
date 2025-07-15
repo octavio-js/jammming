@@ -107,10 +107,8 @@ function App() {
   return (
     <>
       <SearchBar login={redirectToSpotifyAuth} isLoggedIn={isLoggedIn} searchValue={searchValue} searchUpdate={setSearchValue} searchForTracks={fetchTracks} />
-      <div className="results-playlist">
-        <SearchResults handleAddToPlaylist={addToPlaylist} tracks={tracksList} />
-        <Playlist handleRemoveFromPlaylist={removeFromPlaylist} handleSave={createPlaylist} playlistName={playlistName} updatePlaylistName={setPlaylistName} plTracks={playlistTracks} />
-      </div>
+      <SearchResults handleAddToPlaylist={addToPlaylist} tracks={tracksList} />
+      <Playlist handleRemoveFromPlaylist={removeFromPlaylist} handleSave={createPlaylist} playlistName={playlistName} updatePlaylistName={setPlaylistName} plTracks={playlistTracks} />
     </>
   );
 }
