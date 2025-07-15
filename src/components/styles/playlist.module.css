@@ -1,5 +1,51 @@
 .form {
   grid-row-start: 2;
   grid-column-start: 2;
-  background-color: yellow;
+  background-color: var(--color-background);
+  margin-right: 80px;
+  padding: 8px;
+}
+
+.playlistName {
+  color: var(--color-primary);
+  font-family: var(--font-heading);
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.input {
+  font-family: var(--font-body);
+  border: 3px solid var(--color-accent);
+  border-radius: 6px;
+  padding: 4px;
+  margin-right: 20px;
+  font-size: 0.95rem;
+  width: 75%;
+  transition: border-color 250ms ease-in-out;
+}
+
+.input:focus {
+  outline: 0;
+  border-color: var(--color-highlight);
+  transition: border-color 250ms ease-in-out;
+}
+
+.button {
+  background-color: var(--color-primary);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: #fff;
+  border: 2px solid var(--color-accent);
+  border-radius: 6px;
+  padding: 4px;
+  transition: background-color 200ms ease-in-out,
+              border-color 200ms ease-in-out;
+}
+
+.button:hover {
+  cursor: pointer;
+  background-color: var(--color-secondary);
+  border-color: var(--color-highlight);
+  transition: background-color 200ms ease-in-out,
+              border-color 200ms ease-in-out;
 }
