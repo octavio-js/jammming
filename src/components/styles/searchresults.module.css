@@ -1,11 +1,10 @@
 .resultsDiv {
-  grid-row-start: 2;
-  grid-column-start: 1;
   background-color: var(--color-background);
-  margin-left: 80px;
   padding: 8px;
   border-radius: 8px;
+  min-height: 0;
   max-height: 520px;
+  width: 50%;
 }
 
 .header {
