@@ -72,3 +72,7 @@
   color: transparent;
   transition: color 250ms ease-in-out;
 }
+
+.placeholder {
+  display: none;
+}
