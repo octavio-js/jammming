@@ -17,8 +17,10 @@ function Playlist(props) {
     <form className={styles.form} onSubmit={handleSubmit}>
       <div>
         <h2 className={styles.playlistName} id="name-of-playlist">{props.playlistName}</h2>
-        <input className={styles.input} onChange={handleChange} value={props.playlistName} name="playlistName" id="playlistName" type="text" placeholder="Playlist Name..." />
-        <button className={styles.button} type="submit">SAVE TO SPOTIFY</button>
+        <div className={styles["playlist-input-row"]}>
+          <input className={styles.input} onChange={handleChange} value={props.playlistName} name="playlistName" id="playlistName" type="text" placeholder="Playlist Name..." />
+          <button className={styles.button} type="submit">SAVE TO SPOTIFY</button>
+        </div>
       </div>
       <Tracklist handleRemoveFromPlaylist={props.handleRemoveFromPlaylist} tracks={props.plTracks} isRemovable={true} />
     </form>

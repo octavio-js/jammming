@@ -11,12 +11,14 @@ function Track(props) {
           <p className={styles.albumName}>{props.albumName}</p>
         </div>
       </div>
-      {(props.onAddToPlaylist || !props.isRemovable) && (
-        <button type="button" className={styles.addSong} onClick={() => props.handleAddToPlaylist(props.t)}>+</button>
-      )}
-      {props.isRemovable && (
-        <button type="button" className={styles.removeSong} onClick={() => props.handleRemoveFromPlaylist(props.t)}>-</button>
-      )}
+      <div className={styles.trackActions}>
+        {(props.onAddToPlaylist || !props.isRemovable) && (
+          <button type="button" className={styles.addSong} onClick={() => props.handleAddToPlaylist(props.t)}>+</button>
+        )}
+        {props.isRemovable && (
+          <button type="button" className={styles.removeSong} onClick={() => props.handleRemoveFromPlaylist(props.t)}>-</button>
+        )}
+      </div>
     </div>
   );
 }

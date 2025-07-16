@@ -7,6 +7,9 @@
   min-height: 0;
   max-height: 520px;
   width: 50%;
+  box-sizing: border-box;
+  height: 70vh;
+  max-height: 70vh;
 }
 
 .playlistName {
@@ -14,6 +17,7 @@
   font-family: var(--font-heading);
   margin-top: 0;
   margin-bottom: 16px;
+  font-size: 1.75rem;
 }
 
 .input {
@@ -53,4 +57,92 @@
   border-color: var(--color-highlight);
   transition: background-color 200ms ease-in-out,
               border-color 200ms ease-in-out;
+}
+
+/* Responsive Layout */
+@media only screen and (max-width: 900px) {
+  .form {
+    width: 90%;
+    max-width: 100%;
+    height: auto;
+    max-height: none;
+    flex: 1 1 0;
+    min-height: 0;
+  }
+  .playlistName {
+    font-size: 1.5rem;
+  }
+  .input {
+    width: 80%;
+    max-width: 320px;
+  }
+  .button {
+    width: auto;
+    min-width: 120px;
+    max-width: 200px;
+    padding: 8px 18px;
+    font-size: 1rem;
+    border-radius: 8px;
+  }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 1024px) {
+  .form {
+    height: 50vh;
+    max-height: 50vh;
+    min-height: 0;
+    overflow: auto;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .form {
+    width: auto;
+    max-width: calc(100vw - 8vw);
+    padding: 4px;
+    border-radius: 12px;
+    height: auto;
+    max-height: none;
+    flex: 1 1 0;
+    min-height: 0;
+    margin-left: 4vw;
+    margin-right: 4vw;
+  }
+  .playlistName {
+    font-size: 1.2rem;
+  }
+  .input {
+    width: 70%;
+    max-width: 220px;
+    font-size: 1rem;
+    margin-right: 8px;
+    padding: 6px;
+    display: inline-block;
+    vertical-align: middle;
+    height: 36px;
+    box-sizing: border-box;
+  }
+  .button {
+    width: auto;
+    min-width: 80px;
+    font-size: 1rem;
+    padding: 0 14px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    height: 36px;
+    box-sizing: border-box;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .playlist-input-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 12px;
+  }
 }
