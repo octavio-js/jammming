@@ -105,13 +105,13 @@ function App() {
   }
 
   return (
-    <>
+    <div className="parent">
       <SearchBar login={redirectToSpotifyAuth} isLoggedIn={isLoggedIn} searchValue={searchValue} searchUpdate={setSearchValue} searchForTracks={fetchTracks} />
-      <div className="results-playlist">
+      <div className="results-and-playlist">
         <SearchResults handleAddToPlaylist={addToPlaylist} tracks={tracksList} />
         <Playlist handleRemoveFromPlaylist={removeFromPlaylist} handleSave={createPlaylist} playlistName={playlistName} updatePlaylistName={setPlaylistName} plTracks={playlistTracks} />
       </div>
-    </>
+    </div>
   );
 }
 

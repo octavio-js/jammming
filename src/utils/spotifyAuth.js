@@ -25,7 +25,7 @@ async function redirectToSpotifyAuth() {
   localStorage.setItem('code_verifier', codeVerifier);
 
   const clientId = '9e0e8b7b19d649fabd0f4549fdc5a834';
-  const redirectUri = 'https://octavio-js.github.io/jammming';
+  const redirectUri = 'https://octavio-js.github.io/jammming/';
   const scope = [
     'playlist-modify-private',
     'playlist-modify-public',
@@ -58,7 +58,7 @@ async function getToken(code) {
 
   const url = "https://accounts.spotify.com/api/token";
   const clientId = '9e0e8b7b19d649fabd0f4549fdc5a834';
-  const redirectUri = 'https://octavio-js.github.io/jammming';
+  const redirectUri = 'https://octavio-js.github.io/jammming/';
 
   const payload = {
     method: 'POST',

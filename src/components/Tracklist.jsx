@@ -4,7 +4,7 @@ import styles from './styles/tracklist.module.css';
 
 function Tracklist(props) {
   return (
-    <div className={styles.results}>
+    <div className={styles.tracks}>
       {props.tracks.map(track => (
         <Track handleAddToPlaylist={props.handleAddToPlaylist} handleRemoveFromPlaylist={props.handleRemoveFromPlaylist} t={track} key={track.id} songName={track.name} artist={track.artist} albumName={track.album} isRemovable={props.isRemovable} />
       ))}

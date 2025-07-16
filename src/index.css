@@ -5,7 +5,7 @@
   --font-body: 'Poppins', sans-serif;
   --color-primary: #8b5cf6;
   --color-secondary: #312e81;
-  --color-accent: #e5bcfc;
+  --color-accent: #d791ff;
   --color-background: #0f172a;
   --color-highlight: #f472b6;
   --color-error: #f43f5e;
@@ -24,26 +24,4 @@ body {
   height: 100vh;
   background: linear-gradient(135deg, #0f172a 0%, #312e81 60%, #6837db 100%);
   background-repeat: no-repeat;
-}
-
-.results-playlist {
-  display: flex;
-  align-items: flex-start;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-/* Responsive styles */
-@media only screen and (max-width: 900px) {
-  .results-playlist {
-    flex-direction: column;
-    align-items: center;
-  }
-}
-
-@media only screen and (max-width: 600px) {
-  .results-playlist {
-    align-items: center;
-  }
 }
