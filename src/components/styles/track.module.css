@@ -1,0 +1,58 @@
+.track {
+  display: flex;
+  align-items: center;
+  min-height: 120px;
+  width: 100%;
+  border: 1px solid var(--color-highlight);
+  border-radius: 4px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  margin-right: auto;
+}
+
+.songName {
+  color: var(--color-primary);
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  margin-bottom: 4px;
+  margin-top: 0;
+}
+
+.songInfo {
+  font-family: var(--font-body);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.albumName {
+  color: var(--color-secondary);
+}
+
+.addSong,
+.removeSong {
+  width: 40px;
+  height: 40px;
+  background-color: var(--color-primary);
+  font-family: var(--font-body);
+  color: #fff;
+  border: 2px solid var(--color-accent);
+  border-radius: 8px;
+  padding: 8px;
+  margin-right: 4px;
+  transition: background-color 200ms ease-in-out,
+              border-color 200ms ease-in-out;
+}
+
+.addSong:hover,
+.removeSong:hover {
+  cursor: pointer;
+  background-color: var(--color-secondary);
+  border-color: var(--color-highlight);
+  transition: background-color 200ms ease-in-out,
+              border-color 200ms ease-in-out;
+}

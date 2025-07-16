@@ -8,7 +8,7 @@ function Track(props) {
         <h4 className={styles.songName}>{props.songName}</h4>
         <div className={styles.songInfo}>
           <p>{props.artist}</p>
-          <p className={styles.album}>{props.albumName}</p>
+          <p className={styles.albumName}>{props.albumName}</p>
         </div>
       </div>
       {(props.onAddToPlaylist || !props.isRemovable) && (
